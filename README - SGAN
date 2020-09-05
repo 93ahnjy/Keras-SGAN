@@ -1,0 +1,39 @@
+setting = {'image_shape' : (64, 64, 1),
+
+       'CAE_setting' : {'train_dir'         : './Surface_defect_dataset/mnist_png/train'
+                        'test_dir'          : './Surface_defect_dataset/mnist_png/test',
+                        'train_batch_size'  : 8,
+                        'test_batch_size'   : 8,
+                        'epochs'            : 1,
+                        'save_model_name'   : 'CAE_weights.h5'},
+
+       'generator_setting'     : {'input_dim'        : 150,
+                                  'init_filter_size' : 256,
+                                  'upsampling'       : 'nearest'},
+
+       'discriminator_setting' : {'downsampling'     : 'maxpool',
+                                  'load_model_name'  : 'CAE_weights.h5'},
+
+       'SGAN_setting'          : {'train_dir'  : './Surface_defect_dataset/mnist_png/train',
+                                  'test_dir': './Surface_defect_dataset/mnist_png/test',
+                                  'num_class'  : 10,
+                                  'batch_size' : 128,
+                                  'epochs'     : 30000}
+
+       }
+
+
+
+
+# Training 과정
+   1. 'CAE_setting' 대로 training
+   2. CAE 모델 save
+   3. CAE를 discriminator로 load
+   4. GAN 학습
+
+
+# Training시 dataset 구성 방식
+   1. CAE : 'train_dir'에 이미지들만 존재하면 됨
+   2. GAN : 'train_dir'내에는 각 class별로 폴더가 나누어져 있고, 각 폴더별로 이미지가 존재하면 됨.
+
+
